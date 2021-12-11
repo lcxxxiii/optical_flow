@@ -57,6 +57,11 @@ while(1):
 
     # 计算每帧的光流
     p1, st, err = cv2.calcOpticalFlowPyrLK(old_gray, frame_gray, p0, None, **lk_params)
+    '''
+    pl表示光流检测后的角点位置，st表示是否是运动的角点，err表示是否出错，
+    old_gray表示输入前一帧图片，frame_gray表示后一帧图片，p0表示需要检测的角点，
+    lk_params：winSize表示选择多少个点进行u和v的求解，maxLevel表示空间金字塔的层数
+    '''
 
     # 选取好的跟踪点
     good_new = p1[st==1]
@@ -77,7 +82,7 @@ while(1):
     if k == 27:
         break
 
-    print(p1,st,err)
+    
 
     # 更新上一帧的图像和追踪点
     old_gray = frame_gray.copy()
